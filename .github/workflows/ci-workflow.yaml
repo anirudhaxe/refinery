@@ -38,5 +38,7 @@ jobs:
         continue-on-error: false
 
       - name: Lint check
-        run: pnpm run lint
+        run: |
+          turbo build --filter=@repo/ui  # buiding css
+          pnpm run lint
         continue-on-error: false
