@@ -1,0 +1,44 @@
+name: CI workflow
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ci-check:
+    name: CI check
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [21]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Format check
+        run: pnpm run format-check
+        continue-on-error: false
+
+      - name: Type check
+        run: pnpm run type-check
+        continue-on-error: false
+
+      - name: Lint check
+        run: |
+          pnpm run build-ui
+          pnpm run lint
+        continue-on-error: false
