@@ -5,7 +5,7 @@
     "build-ui": "turbo build --filter=@repo/ui",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
     "format-check": "prettier . --check",
     "type-check": "turbo type-check",
     "clean": "turbo clean"
@@ -19,5 +19,5 @@
   "engines": {
     "node": ">=18"
   },
-  "name": "with-tailwind"
+  "name": "refinery"
 }
